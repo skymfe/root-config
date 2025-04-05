@@ -1,24 +1,14 @@
-import { registerApplication, start, LifeCycles } from "single-spa";
+import { registerApplication, start } from "single-spa";
 
 registerApplication({
-  name: "@single-spa/welcome",
+  name: "@skymfe/header-mf",
   app: () =>
     import(
       /* webpackIgnore: true */ // @ts-ignore-next
-      "https://unpkg.com/single-spa-welcome/dist/single-spa-welcome.js"
+      "@skymfe/header-mf"
     ),
   activeWhen: ["/"],
 });
-
-// registerApplication({
-//   name: "@skymfe/navbar",
-//   app: () =>
-//     import(
-//       /* webpackIgnore: true */ // @ts-ignore-next
-//       "@skymfe/navbar"
-//     ),
-//   activeWhen: ["/"],
-// });
 
 start({
   urlRerouteOnly: true,
