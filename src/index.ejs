@@ -1,63 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Root Config</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
-  <meta name="importmap-type" use-injector />
-  <script type="injector-importmap">
-    {
-      "imports": {
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@6.0.3/lib/es2015/esm/single-spa.min.js",
-        "react": "https://esm.sh/*react@18.2.0/index.js",
-        "react-dom": "https://esm.sh/*react-dom@18.2.0/index.js",
-        "react-dom/client": "https://esm.sh/*react-dom@18.2.0/client.js",
-        "classnames": "https://esm.sh/*classnames@2.5.1/index.js",
-        "react-router-dom": "https://esm.sh/*react-router-dom@6.22.0/dist/index.js"
-      },
-      "scopes": {
-        "https://esm.sh/": {
-          "scheduler": "https://esm.sh/*scheduler@0.23.2/index.js"
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Root Config</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';" />
+    <meta name="importmap-type" use-injector />
+    <script type="injector-importmap">
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@6.0.3/lib/es2015/esm/single-spa.min.js",
+          "react": "https://esm.sh/*react@18.2.0/index.js",
+          "react-dom": "https://esm.sh/*react-dom@18.2.0/index.js",
+          "react-dom/client": "https://esm.sh/*react-dom@18.2.0/client.js",
+          "classnames": "https://esm.sh/*classnames@2.5.1/index.js",
+          "react-router-dom": "https://esm.sh/*react-router-dom@6.22.0/dist/index.js"
+        },
+        "scopes": {
+          "https://esm.sh/": {
+            "scheduler": "https://esm.sh/*scheduler@0.23.2/index.js"
+          }
         }
       }
-    }
-  </script>
+    </script>
 
-  <% if (isLocal) { %>
-  <script type="injector-importmap">
-    {
-      "imports": {
-        "@skymfe/root-config": "//localhost:9000/skymfe-root-config.js",
-        "@skymfe/header-mf": "//localhost:9001/skymfe-header-mf.js",
-        "@skymfe/flight-booking-mf": "//localhost:9002/skymfe-flight-booking-mf.js"
+    <% if (isLocal) { %>
+    <script type="injector-importmap">
+      {
+        "imports": {
+          "@skymfe/root-config": "//localhost:9000/skymfe-root-config.js",
+          "@skymfe/header-mf": "//localhost:9001/skymfe-header-mf.js",
+          "@skymfe/flight-booking-mf": "//localhost:9002/skymfe-flight-booking-mf.js",
+          "@skymfe/styleguide": "//localhost:8000/skymfe-styleguide.js"
+        }
       }
-    }
-  </script>
-  <% } %>
+    </script>
+    <% } %>
 
-  <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@5.1.1/dist/import-map-overrides.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@single-spa/import-map-injector@2.0.1/lib/import-map-injector.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@5.1.1/dist/import-map-overrides.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@single-spa/import-map-injector@2.0.1/lib/import-map-injector.js"></script>
 
-  <!-- <template id="single-spa-layout">
-    <single-spa-router>
-      <nav class="topnav">
-        <application name="@skymfe/header-mf" loader="header" error="header"></application>
-      </nav>
-    </single-spa-router>
-  </template> -->
-</head>
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <main></main>
-  <script>
-    window.importMapInjector.initPromise.then(() => {
-      import('@skymfe/root-config');
-    });
-  </script>
-  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
-</body>
+    <template id="single-spa-layout">
+      <single-spa-router>
+        <nav class="topnav">
+          <application name="@skymfe/header-mf" loader="header" error="header"></application>
+        </nav>
+        <main>
+          <route path="flights">
+            <application name="@skymfe/flight-booking-mf"></application>
+          </route>
+          <route default>
+            <h1>Home</h1>
+          </route>
+        </main>
+      </single-spa-router>
+    </template>
+  </head>
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <main></main>
+    <script>
+      window.importMapInjector.initPromise.then(() => {
+        import("@skymfe/root-config");
+        import("@skymfe/styleguide");
+      });
+    </script>
+    <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
+  </body>
 </html>
