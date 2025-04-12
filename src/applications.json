@@ -1,30 +1,12 @@
 {
   "routes": [
     {
-      "type": "application",
-      "name": "@skymfe/header-mf",
-      "props": {},
-      "loader": "<h1>Loading header</h1>",
-      "error": "<h1>Failed to load header</h1>"
-    },
-    {
       "type": "route",
-      "path": "flights",
+      "path": "auth",
       "routes": [
         {
           "type": "application",
-          "name": "@skymfe/flight-booking-mf",
-          "props": {}
-        }
-      ]
-    },
-    {
-      "type": "route",
-      "path": "profile",
-      "routes": [
-        {
-          "type": "application",
-          "name": "@skymfe/profile-mf",
+          "name": "@skymfe/auth-mf",
           "props": {}
         }
       ]
@@ -34,10 +16,38 @@
       "default": true,
       "routes": [
         {
-          "type": "html",
-          "content": "<h1>Home</h1>"
+          "type": "application",
+          "name": "@skymfe/header-mf",
+          "props": {},
+          "loader": "<h1>Loading header</h1>",
+          "error": "<h1>Failed to load header</h1>"
+        },
+        {
+          "type": "route",
+          "path": "flights",
+          "routes": [
+            {
+              "type": "application",
+              "name": "@skymfe/flight-booking-mf",
+              "props": {}
+            }
+          ]
+        },
+        {
+          "type": "route",
+          "path": "profile",
+          "routes": [
+            {
+              "type": "application",
+              "name": "@skymfe/profile-mf",
+              "props": {}
+            }
+          ]
         }
       ]
     }
-  ]
+  ],
+  "redirects": {
+    "/": "/flights"
+  }
 }
