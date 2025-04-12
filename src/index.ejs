@@ -32,7 +32,8 @@
           "@skymfe/root-config": "//localhost:9000/skymfe-root-config.js",
           "@skymfe/header-mf": "//localhost:9001/skymfe-header-mf.js",
           "@skymfe/flight-booking-mf": "//localhost:9002/skymfe-flight-booking-mf.js",
-          "@skymfe/styleguide": "//localhost:8000/skymfe-styleguide.js"
+          "@skymfe/styleguide": "//localhost:8000/skymfe-styleguide.js",
+          "@skymfe/profile-mf": "//localhost:9004/skymfe-profile-mf.js"
         }
       }
     </script>
@@ -49,6 +50,9 @@
         <main>
           <route path="flights">
             <application name="@skymfe/flight-booking-mf"></application>
+          </route>
+          <route path="profile">
+            <application name="@skymfe/profile-mf"></application>
           </route>
           <route default>
             <h1>Home</h1>
