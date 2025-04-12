@@ -41,25 +41,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@5.1.1/dist/import-map-overrides.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@single-spa/import-map-injector@2.0.1/lib/import-map-injector.js"></script>
-
-    <template id="single-spa-layout">
-      <single-spa-router>
-        <nav class="topnav">
-          <application name="@skymfe/header-mf" loader="header" error="header"></application>
-        </nav>
-        <main>
-          <route path="flights">
-            <application name="@skymfe/flight-booking-mf"></application>
-          </route>
-          <route path="profile">
-            <application name="@skymfe/profile-mf"></application>
-          </route>
-          <route default>
-            <h1>Home</h1>
-          </route>
-        </main>
-      </single-spa-router>
-    </template>
   </head>
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
